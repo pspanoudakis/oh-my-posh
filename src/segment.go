@@ -51,6 +51,7 @@ type SegmentStyle string
 type SegmentType string
 
 const (
+	BatterySimple SegmentType = "batterySimple"
 	// Session represents the user info segment
 	Session SegmentType = "session"
 	// Path represents the current path segment
@@ -226,6 +227,7 @@ func (segment *Segment) background() string {
 func (segment *Segment) mapSegmentWithWriter(env environmentInfo) error {
 	segment.env = env
 	functions := map[SegmentType]SegmentWriter{
+		BatterySimple: &batterySimple{},
 		OWM:           &owm{},
 		Session:       &session{},
 		Path:          &path{},

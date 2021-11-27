@@ -40,6 +40,7 @@ module.exports = {
         "aws",
         "az",
         "azfunc",
+        "batterySimple",
         "battery",
         "command",
         "crystal",

@@ -146,6 +146,7 @@
           "title": "Segment Type",
           "description": "https://ohmyposh.dev/docs/config-overview#type-1",
           "enum": [
+            "batterySimple",
             "session",
             "path",
             "git",
@@ -245,6 +246,29 @@
         }
       },
       "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": { "const": "batterySimple" }
+            }
+          },
+          "then": {
+            "title": "Display something new",
+            "description": "https://ohmyposh.dev/docs/new",
+            "properties": {
+              "properties": {
+                "properties": {
+                  "nwprop": {
+                    "type": "boolean",
+                    "title": "New Property",
+                    "description": "the default text to display",
+                    "default": "Hello"
+                  }
+                }
+              }
+            }
+          }
+        },
         {
           "if": {
             "properties": {
