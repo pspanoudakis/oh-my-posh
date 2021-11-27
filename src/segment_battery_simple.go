@@ -75,7 +75,7 @@ func (bs *batterySimple) setColors() {
 		bgColor = ChargingBGColor
 	case battery.Full:
 		fgColor = ChargedFGColor
-		bgColor = ChargedFGColor
+		bgColor = ChargedBGColor
 	case battery.Empty, battery.Unknown:
 		return
 	}
