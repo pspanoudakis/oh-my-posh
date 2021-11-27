@@ -11,13 +11,25 @@ type batterySimple struct {
 	env   environmentInfo
 
 	battery.Battery
-	Pct  int
-	Icon string
+	BatteryIcon string
+	Pct         int
+	StatusIcon  string
 }
 
 const (
-	//NewProp enables something
-	NewProp Property = "newprop"
+	Icon Property = "icon"
+	// ChargingIcon to display when charging
+	ChargingIcn     Property = "charging_icon"
+	ChargingFGColor Property = "charging_fg_color"
+	ChargingBGColor Property = "charging_bg_color"
+	// DischargingIcon o display when discharging
+	DischargingIcn     Property = "discharging_icon"
+	DischargingFGColor Property = "discharging_fg_color"
+	DischargingBGColor Property = "discharging_bg_color"
+	// ChargedIcon to display when fully charged
+	ChargedIcn     Property = "charged_icon"
+	ChargedFGColor Property = "charged_fg_color"
+	ChargedBGColor Property = "charged_bg_color"
 )
 
 func (bs *batterySimple) enabled() bool {
@@ -35,15 +47,40 @@ func (bs *batterySimple) enabled() bool {
 
 	switch bs.Battery.State {
 	case battery.Discharging, battery.NotCharging:
-		bs.Icon = bs.props.getString(DischargingIcon, "")
+		bs.StatusIcon = bs.props.getString(DischargingIcn, "")
 	case battery.Charging:
-		bs.Icon = bs.props.getString(ChargingIcon, "")
+		bs.StatusIcon = bs.props.getString(ChargingIcn, "")
 	case battery.Full:
-		bs.Icon = bs.props.getString(ChargedIcon, "")
+		bs.StatusIcon = bs.props.getString(ChargedIcn, "")
 		/* case battery.Unknown, battery.Empty:
 		return true */
 	}
+	bs.BatteryIcon = bs.props.getString(Icon, "")
+	bs.setColors()
 	return true
+}
+
+func (bs *batterySimple) setColors() {
+	if !bs.props.hasOneOf(ChargedFGColor, ChargedBGColor, ChargingFGColor, ChargingBGColor, DischargingFGColor, DischargingBGColor) {
+		return
+	}
+	var fgColor Property
+	var bgColor Property
+	switch bs.Battery.State {
+	case battery.Discharging, battery.NotCharging:
+		fgColor = DischargingFGColor
+		bgColor = DischargingBGColor
+	case battery.Charging:
+		fgColor = ChargingFGColor
+		bgColor = ChargingBGColor
+	case battery.Full:
+		fgColor = ChargedFGColor
+		bgColor = ChargedFGColor
+	case battery.Empty, battery.Unknown:
+		return
+	}
+	bs.props[BackgroundOverride] = bs.props.getColor(bgColor, bs.props.getColor(BackgroundOverride, ""))
+	bs.props[ForegroundOverride] = bs.props.getColor(fgColor, bs.props.getColor(ForegroundOverride, ""))
 }
 
 func (bs *batterySimple) newTotalState(newState battery.State) battery.State {
@@ -62,7 +99,7 @@ func (bs *batterySimple) newTotalState(newState battery.State) battery.State {
 }
 
 func (bs *batterySimple) string() string {
-	segmentTemplate := bs.props.getString(SegmentTemplate, "{hahah {.Icon}{.Pct}}")
+	segmentTemplate := bs.props.getString(SegmentTemplate, "{{.BatteryIcon}}{{.Pct}}% {{.StatusIcon}}")
 	template := &textTemplate{
 		Template: segmentTemplate,
 		Context:  bs,

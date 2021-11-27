@@ -253,16 +253,70 @@
             }
           },
           "then": {
-            "title": "Display something new",
+            "title": "Simple Battery Segment",
             "description": "https://ohmyposh.dev/docs/new",
             "properties": {
               "properties": {
                 "properties": {
-                  "nwprop": {
-                    "type": "boolean",
-                    "title": "New Property",
-                    "description": "the default text to display",
-                    "default": "Hello"
+                  "icon": {
+                    "type": "string",
+                    "title": "Battery Icon",
+                    "description": "Battery icon/symbol to display",
+                    "default": ""
+                  },
+                  "charging_icon": {
+                    "type": "string",
+                    "title": "Charging Icon",
+                    "description": "Icon/Text to display when charging",
+                    "default": ""
+                  },
+                  "discharging_icon": {
+                    "type": "string",
+                    "title": "Discharging Icon",
+                    "description": "Icon/Text to display when discharging",
+                    "default": ""
+                  },
+                  "charged_icon": {
+                    "type": "string",
+                    "title": "Charged Icon",
+                    "description": "Icon/symbol to display when charged",
+                    "default": ""
+                  },
+                  "charging_bg_color": {
+                    "type": "string",
+                    "title": "Charging Background Color",
+                    "description": "Background Color when charging",
+                    "default": ""
+                  },
+                  "charging_fg_color": {
+                    "type": "string",
+                    "title": "Charging Foreground Color",
+                    "description": "Foreground Color when charging",
+                    "default": ""
+                  },
+                  "discharging_bg_color": {
+                    "type": "string",
+                    "title": "Discharging Background Color",
+                    "description": "Background Color when discharging",
+                    "default": ""
+                  },
+                  "discharging_fg_color": {
+                    "type": "string",
+                    "title": "Discharging Foreground Color",
+                    "description": "Foreground Color when discharging",
+                    "default": ""
+                  },
+                  "charged_bg_color": {
+                    "type": "string",
+                    "title": "Charged Background Color",
+                    "description": "Background Color when charged",
+                    "default": ""
+                  },
+                  "charged_fg_color": {
+                    "type": "string",
+                    "title": "Charged Foreground Color",
+                    "description": "Foreground Color when charged",
+                    "default": ""
                   }
                 }
               }
