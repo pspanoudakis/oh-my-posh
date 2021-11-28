@@ -99,7 +99,7 @@ func (bs *batterySimple) newTotalState(newState battery.State) battery.State {
 }
 
 func (bs *batterySimple) string() string {
-	segmentTemplate := bs.props.getString(SegmentTemplate, "{{.BatteryIcon}}{{.Pct}}% {{.StatusIcon}}")
+	segmentTemplate := bs.props.getString(SegmentTemplate, "{{.StatusIcon}}{{.BatteryIcon}}{{.Pct}}%")
 	template := &textTemplate{
 		Template: segmentTemplate,
 		Context:  bs,
