@@ -258,6 +258,12 @@
             "properties": {
               "properties": {
                 "properties": {
+                  "use_level_icons": {
+                    "type": "boolean",
+                    "title": "Different battery level icons",
+                    "description": "Use different icons for each battery level",
+                    "default": false
+                  },
                   "icon": {
                     "type": "string",
                     "title": "Battery Icon",
@@ -283,40 +289,34 @@
                     "default": ""
                   },
                   "charging_bg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Charging Background Color",
-                    "description": "Background Color when charging",
-                    "default": ""
+                    "description": "Background Color when charging"
                   },
                   "charging_fg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Charging Foreground Color",
-                    "description": "Foreground Color when charging",
-                    "default": ""
+                    "description": "Foreground Color when charging"
                   },
                   "discharging_bg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Discharging Background Color",
-                    "description": "Background Color when discharging",
-                    "default": ""
+                    "description": "Background Color when discharging"
                   },
                   "discharging_fg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Discharging Foreground Color",
-                    "description": "Foreground Color when discharging",
-                    "default": ""
+                    "description": "Foreground Color when discharging"
                   },
                   "charged_bg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Charged Background Color",
-                    "description": "Background Color when charged",
-                    "default": ""
+                    "description": "Background Color when charged"
                   },
                   "charged_fg_color": {
-                    "type": "string",
+                    "$ref": "#/definitions/color",
                     "title": "Charged Foreground Color",
-                    "description": "Foreground Color when charged",
-                    "default": ""
+                    "description": "Foreground Color when charged"
                   }
                 }
               }

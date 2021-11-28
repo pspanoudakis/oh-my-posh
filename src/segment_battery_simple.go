@@ -17,7 +17,13 @@ type batterySimple struct {
 }
 
 const (
-	Icon Property = "icon"
+	UseLevelIcons   Property = "use_level_icons"
+	Icon            Property = "icon"
+	FullLevelIcon   Property = "full_lvl_icon"
+	GoodLevelIcon   Property = "good_lvl_icon"
+	MediumLevelIcon Property = "medium_lvl_icon"
+	LowLevelIcon    Property = "low_lvl_icon"
+	EmptyLevelIcon  Property = "empty_lvl_icon"
 	// ChargingIcon to display when charging
 	ChargingIcn     Property = "charging_icon"
 	ChargingFGColor Property = "charging_fg_color"
@@ -55,9 +61,27 @@ func (bs *batterySimple) enabled() bool {
 		/* case battery.Unknown, battery.Empty:
 		return true */
 	}
-	bs.BatteryIcon = bs.props.getString(Icon, "")
 	bs.setColors()
+	bs.setIcon()
 	return true
+}
+
+func (bs *batterySimple) setIcon() {
+	if bs.props.getBool(UseLevelIcons, false) {
+		if bs.Pct == 100 {
+			bs.BatteryIcon = bs.props.getString(FullLevelIcon, "")
+		} else if bs.Pct >= 65 {
+			bs.BatteryIcon = bs.props.getString(GoodLevelIcon, "")
+		} else if bs.Pct >= 35 {
+			bs.BatteryIcon = bs.props.getString(MediumLevelIcon, "")
+		} else if bs.Pct >= 10 {
+			bs.BatteryIcon = bs.props.getString(LowLevelIcon, "")
+		} else {
+			bs.BatteryIcon = bs.props.getString(EmptyLevelIcon, "")
+		}
+	} else {
+		bs.BatteryIcon = bs.props.getString(Icon, "")
+	}
 }
 
 func (bs *batterySimple) setColors() {
